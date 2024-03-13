@@ -19,21 +19,15 @@ void data_read_callback(uint16_t *data) {
 
 void TIMER_ISR() 
 {
-    while(LOCKED==TRUE)
-    {
-    }
-    LOCKED = TRUE;
+
     printf("Timer interrupt occurred 100ms\n");
     
-    LOCKED = FALSE;
+
 
 }
 void SPI_ISR() 
 {
-    while(LOCKED==TRUE)
-    {
-    }
-    LOCKED = TRUE;
+
     // Get the received data from the SPI buffer
     uint16_t received_data = get_SPI_received_data();
 
@@ -49,7 +43,7 @@ void SPI_ISR()
     }
 
     spi_transfer_complete = true;
-    LOCKED = FALSE;
+
 }
 
 void device_inserted_callback(bool device_inserted) {
