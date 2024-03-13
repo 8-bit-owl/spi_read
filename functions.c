@@ -26,15 +26,22 @@ void start_SPI_MMC5983_PRODUCT_ID_request(void) {
 // SPI Interrupt Service Routine
 void SPI_ISR(void) {
     // Get the received data from the SPI buffer
-    uint8_t received_data = get_SPI_received_data();
-
+    uint8_t single_byte = get_SPI_received_data();
+    
     // Store the received data in the volatile buffer
-    buffer[0] = received_data;
+    
 
     // Check if the received data matches the MMC5983 PRODUCT_ID
     if (received_data == MMC5983_PRODUCT_ID) {
         printf("MMC5983 sensor detected\n");
+        data_read_callback(&buffer[i]);
     } else {
         printf("MMC5983 sensor not detected\n");
     }
+}
+
+
+void TIMER_ISR() {
+}
+void SPI_ISR() {
 }
